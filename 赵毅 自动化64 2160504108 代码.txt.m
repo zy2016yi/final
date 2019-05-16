@@ -1,0 +1,514 @@
+clear;
+clc;
+
+[pi1,map1]= imread('test1.bmp');
+[pi2,map2]= imread('test2.png');
+[pi3,map3]= imread('test3.jpg');
+[pi4,map4]= imread('test4.bmp');
+[pi5,map5]= imread('test5.png');
+[pi6,map6]= imread('test6.jpg');
+
+out1=edge(pi1,'Sobel');
+out2=edge(pi2,'Sobel');
+out3=edge(pi3,'Sobel');
+out4=edge(pi4,'Sobel');
+out5=edge(pi5,'Sobel');
+out6=edge(pi6,'Sobel');
+
+out11=edge(pi1,'canny');
+out12=edge(pi2,'canny');
+out13=edge(pi3,'canny');
+out14=edge(pi4,'canny');
+out15=edge(pi5,'canny');
+out16=edge(pi6,'canny');
+
+
+[H1,T1,R1] = hough(out1,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H2,T2,R2] = hough(out2,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H3,T3,R3] = hough(out3,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H4,T4,R4] = hough(out4,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H5,T5,R5] = hough(out5,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H6,T6,R6] = hough(out6,'RhoResolution',0.5,'Theta',-90:0.5:89);
+
+[H11,T11,R11] = hough(out11,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H12,T12,R12] = hough(out12,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H13,T13,R13] = hough(out13,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H14,T14,R14] = hough(out14,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H15,T15,R15] = hough(out15,'RhoResolution',0.5,'Theta',-90:0.5:89);
+[H16,T16,R16] = hough(out16,'RhoResolution',0.5,'Theta',-90:0.5:89);
+P1  = houghpeaks(H1,20);
+P2  = houghpeaks(H2,20);
+P3  = houghpeaks(H3,20);
+P4  = houghpeaks(H4,20);
+P5  = houghpeaks(H5,20);
+P6  = houghpeaks(H6,20);
+P11  = houghpeaks(H11,20);
+P12  = houghpeaks(H12,20);
+P13  = houghpeaks(H13,20);
+P14  = houghpeaks(H14,20);
+P15  = houghpeaks(H15,20);
+P16  = houghpeaks(H16,20);
+
+
+
+
+
+figure;
+subplot(3,3,1) 
+imshow(pi1);
+title('原图像')
+subplot(3,3,2) 
+imshow(out1);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out11);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H1)),'XData',T1,'YData',R1,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T1(P1(:,2)),R1(P1(:,1)),'s','color','white');
+
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H11)),'XData',T11,'YData',R11,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T11(P11(:,2)),R11(P11(:,1)),'s','color','white');
+saveas(gcf, '1.png');
+
+
+
+
+
+figure;
+subplot(3,3,1) 
+imshow(pi2);
+title('原图像')
+subplot(3,3,2) 
+imshow(out2);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out12);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H2)),'XData',T2,'YData',R2,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T2(P2(:,2)),R2(P2(:,1)),'s','color','white');
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H12)),'XData',T12,'YData',R12,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T12(P12(:,2)),R12(P12(:,1)),'s','color','white');
+saveas(gcf, '2.png');
+
+
+figure;
+subplot(3,3,1) 
+imshow(pi3);
+title('原图像')
+subplot(3,3,2) 
+imshow(out3);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out13);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H3)),'XData',T3,'YData',R3,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T3(P3(:,2)),R3(P3(:,1)),'s','color','white');
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H13)),'XData',T13,'YData',R13,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T13(P13(:,2)),R13(P13(:,1)),'s','color','white');
+saveas(gcf, '3.png');
+
+figure;
+subplot(3,3,1) 
+imshow(pi4);
+title('原图像')
+subplot(3,3,2) 
+imshow(out4);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out14);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H4)),'XData',T4,'YData',R4,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T4(P4(:,2)),R4(P4(:,1)),'s','color','white');
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H14)),'XData',T14,'YData',R14,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T14(P14(:,2)),R14(P14(:,1)),'s','color','white');
+saveas(gcf, '4.png');
+
+figure;
+subplot(3,3,1) 
+imshow(pi5);
+title('原图像')
+subplot(3,3,2) 
+imshow(out5);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out15);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H5)),'XData',T5,'YData',R5,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T5(P5(:,2)),R5(P5(:,1)),'s','color','white');
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H15)),'XData',T15,'YData',R15,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T15(P15(:,2)),R15(P15(:,1)),'s','color','white');
+
+saveas(gcf, '5.png');
+
+figure;
+subplot(3,3,1) 
+imshow(pi6);
+title('原图像')
+subplot(3,3,2) 
+imshow(out6);
+title('应用sobel边缘检测')
+subplot(3,3,3) 
+imshow(out16);
+title('应用canny边缘检测')
+subplot(3,3,[4,5,6])
+imshow(imadjust(rescale(H6)),'XData',T6,'YData',R6,...
+   'InitialMagnification','fit');
+title('应用sobel算子边缘检测进行\Theta范围有限的Hough变换');
+% xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T6(P6(:,2)),R6(P6(:,1)),'s','color','white');
+
+subplot(3,3,[7,8,9])
+imshow(imadjust(rescale(H16)),'XData',T16,'YData',R16,...
+   'InitialMagnification','fit');
+title('应用canny算子边缘检测进行\Theta范围有限的Hough变换');
+xlabel('\theta')
+ylabel('\rho');
+axis on, axis normal;
+colormap(gca,hot)
+hold on;
+plot(T16(P16(:,2)),R16(P16(:,1)),'s','color','white');
+
+saveas(gcf, '6.png');
+
+figure 
+BW=out1;T=T1;R=R1;P=P1;rotI=pi1;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel1.png');
+figure 
+BW=out11;T=T11;R=R11;P=P11;rotI=pi1;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny1.png');
+
+
+figure 
+BW=out2;T=T2;R=R2;P=P2;rotI=pi2;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel2.png');
+figure 
+BW=out12;T=T12;R=R12;P=P12;rotI=pi2;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny2.png');
+
+figure 
+BW=out3;T=T3;R=R3;P=P3;rotI=pi3;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel3.png');
+figure 
+BW=out13;T=T1;R=R13;P=P13;rotI=pi3;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny3.png');
+
+figure 
+BW=out4;T=T4;R=R4;P=P4;rotI=pi4;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel4.png');
+figure 
+BW=out14;T=T14;R=R14;P=P14;rotI=pi4;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny4.png');
+figure 
+BW=out5;T=T5;R=R5;P=P5;rotI=pi5;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel5.png');
+figure 
+BW=out15;T=T15;R=R15;P=P15;rotI=pi5;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny5.png');
+figure 
+BW=out6;T=T6;R=R6;P=P6;rotI=pi6;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'sobel6.png');
+figure 
+BW=out16;T=T16;R=R16;P=P16;rotI=pi6;
+lines = houghlines(BW,T,R,P,'FillGap',5,'MinLength',7);
+ imshow(rotI), hold on
+max_len = 0;
+for k = 1:length(lines)
+   xy = [lines(k).point1; lines(k).point2];
+   plot(xy(:,1),xy(:,2),'LineWidth',2,'Color','green');
+
+   % Plot beginnings and ends of lines
+   plot(xy(1,1),xy(1,2),'x','LineWidth',2,'Color','yellow');
+   plot(xy(2,1),xy(2,2),'x','LineWidth',2,'Color','red');
+
+   % Determine the endpoints of the longest line segment
+   len = norm(lines(k).point1 - lines(k).point2);
+   if ( len > max_len)
+      max_len = len;
+      xy_long = xy;
+   end
+end
+saveas(gcf, 'canny6.png');
+
+
