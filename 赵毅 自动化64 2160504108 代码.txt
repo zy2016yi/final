@@ -6,7 +6,6 @@ clc;
 [pi3,map3]= imread('test3.jpg');
 [pi4,map4]= imread('test4.bmp');
 [pi5,map5]= imread('test5.png');
-[pi6,map6]= imread('test6.jpg');
 
 out1=edge(pi1,'Sobel');
 out2=edge(pi2,'Sobel');
